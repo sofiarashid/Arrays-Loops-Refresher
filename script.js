@@ -6,6 +6,10 @@ function render (html) {
   document.getElementById('out').innerHTML = html
 }
 
+
+
+
+
 /* 
   1) listFoods()
      - Use a for...of loop
@@ -13,7 +17,16 @@ function render (html) {
 */
 function listFoods () {
   // code goes here
+  let output = ''
+    for (const food of foods) {
+      output += `<p> ${food} </p>`
+    }
+  render(output)
 }
+
+
+
+
 
 /* 
   2) numberedFoods()
@@ -22,7 +35,18 @@ function listFoods () {
 */
 function numberedFoods () {
   // code goes here
+  let output = `<ol class="list-group list-group-numbered">`
+    for(let i=0; i < foods.length; i++) {
+      output += `<li class="list-group-item"> ${foods[i]}</li>`
+    }
+  output += `</ol>`
+  render(output)
 }
+
+
+
+
+
 
 /* 
   3) filterFoods()
@@ -33,7 +57,31 @@ function numberedFoods () {
 */
 function filterFoods () {
   // code goes here
+  const letter = prompt('Enter a letter to filter by:')
+  if (!letter) {
+    render(`<p class = "text-muted">Please enter a letter!!</p>`)
+    return
+  }
+
+  const lower = letter.toLowerCase()
+  const matches = foods.filter(f => f.toLowerCase().startsWith(lower))
+
+  if (matches.length === 0) {
+    render(`<p class="m=0">No foods found starting with '<strong>${letter}</strong>'</p>`)
+    return
+  }
+
+  const list = matches
+                  .map(item => `<li class = "list-group-item"> ${item}</li>`)
+                  .join('')
+
+  render(`<ul class="list-group">${list}</ul>`)
 }
+
+
+
+
+
 
 /* 
   4) forEachFoods()
@@ -43,13 +91,38 @@ function filterFoods () {
 */
 function forEachFoods () {
   // code goes here
+  let output = `<div class="row g-3 justify-content-center">`
+  foods.forEach(food => {
+    output += `
+    <div class="col-12 col-sm-6 col-md-4 col-lg-3 d-flex">
+      <div class="card shadow-sm w-100">
+        <div class="card-body text-center">
+          <h5 class="card-title mb-0">${food}</h5>
+        </div>
+      </div>
+    </div>
+    `
+  })
+
+  output += `</div>`
+  render(output)
 }
+
+
+
+
+
 
 // ---- Event listeners (buttons) ----
 document.getElementById('btnList').addEventListener('click', listFoods)
 document.getElementById('btnNums').addEventListener('click', numberedFoods)
 document.getElementById('btnFilter').addEventListener('click', filterFoods)
 document.getElementById('btnForEach').addEventListener('click', forEachFoods)
+
+
+
+
+
 
 //  ---------------STUDENT WORK SECTION--------------
 
@@ -63,6 +136,11 @@ function uppercaseList () {
   // TODO: Write your code here
 }
 
+
+
+
+
+
 /* 
   Task 2 — Reverse List
   ---------------------
@@ -72,6 +150,10 @@ function uppercaseList () {
 function reverseList () {
   // TODO: Write your code here
 }
+
+
+
+
 
 /* 
   Task 3 — Random Food Picker
@@ -83,6 +165,10 @@ function randomFoodPicker () {
   // TODO: Write your code here
 }
 
+
+
+
+
 /* 
   Task 4 — Word Lengths
   ---------------------
@@ -93,6 +179,11 @@ function randomFoodPicker () {
 function wordLengths () {
   // TODO: Write your code here
 }
+
+
+
+
+
 
 // ---- Event listeners for the new buttons ----
 // (Make sure to add matching buttons in index.html)
