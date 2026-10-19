@@ -181,7 +181,7 @@ function RandomFoodPicker () {
   const pickedFood = foods[randomIndex];
   const output = `<div class="card shadow-sm mx-auto" style="max-width: 400px;">
     <div class="card-body text-center">
-      <h5 class="card-title">Random Food:</h5>
+      <h5 class="card-title">Today's Pick:</h5>
       <p class="card-text">${pickedFood}</p>
     </div>
   </div>
